@@ -26,7 +26,7 @@ const Login = () => {
         .then((userCredential) => {
             // Signed in
             const user = userCredential.user;
-            navigate("/home")
+            navigate("/")
             console.log(user);
             alert("user login successfull Welcome to our page");
         })
