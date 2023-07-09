@@ -1,4 +1,7 @@
-import React from "react";
+import React, {useState} from 'react';
+import {  signInWithEmailAndPassword   } from 'firebase/auth';
+import { auth } from '../firebase';
+import { NavLink, useNavigate } from 'react-router-dom'
 import { HeadDescription } from "../components/Styles";
 import NavbarHead from "../components/NavbarHead";
 import FooterBottom from "../components/FooterBottom";
@@ -13,11 +16,28 @@ import {
 } from "../components/Styles";
 
 const Login = () => {
-  // const Login = () => {
-  //     const handleLogin = (e) => {
-  //       e.preventDefault();
-  //       // Perform login logic here
-  //     };
+  const navigate = useNavigate();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+       
+    const onLogin = (e) => {
+        e.preventDefault();
+        signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            // Signed in
+            const user = userCredential.user;
+            navigate("/home")
+            console.log(user);
+            alert("user login successfull Welcome to our page");
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.log(errorCode, errorMessage)
+        });
+       
+    }
+  
 
   return (
     <div>
@@ -25,7 +45,7 @@ const Login = () => {
       <PageContainer>
         <ContentContainer>
           <HeadTitle style={{ marginTop: "130px" }}>User Login</HeadTitle>
-          {/* <form onSubmit={handleLogin}> */}
+          
 
           <form style={{ marginTop: "50px", marginLeft: "550px" }}>
             <FormGroup>
@@ -35,6 +55,9 @@ const Login = () => {
                 placeholder="Enter your username"
                 id="name"
                 name="name"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
               />
             </FormGroup>
 
@@ -45,12 +68,16 @@ const Login = () => {
                 placeholder="Enter your password"
                 id="pw"
                 name="pw"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
               />
             </FormGroup>
 
             <Button
               style={{ marginLeft: "110px", marginTop: "50px" }}
               type="submit"
+              onClick={onLogin}
             >
               Login
             </Button>
