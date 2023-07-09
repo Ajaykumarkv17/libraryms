@@ -1,6 +1,8 @@
-This is the my first Web app using Javascript and React hooks like useState,useEffect and useRef. The complete design you see in webpage is stored in Styles.js inside the components folder. It has 6 pages and it is been organized through Route of react from home page to search page. Have a look at my webpage! Download node modules and do npm start,it will be developed in localhost://3000 site Great Coding!
+This is my first task of my 2nd round Coding and i done it using ReactJs.
 
 Backend yet to be done! Only Frontend! All data and photos retrieved are stored in folders locally!
+here you can view the app
+https://library-app-gkpd.onrender.com/
 
 # Getting Started with Create React App
 
